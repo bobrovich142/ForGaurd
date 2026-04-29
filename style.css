@@ -1,0 +1,241 @@
+body {
+     margin: 0;
+     font-family: 'Segoe UI', Arial;
+sans-serif;
+    background: 
+    linear-gradient(135deg, #0f2027,
+    #203a43, #2c5364);
+    color:white;
+    text-align: center;
+
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
+
+.container {
+     margin-top: 100px;
+     padding: 20px;
+}
+
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.highlight {
+      color: #00ff84;
+      font-weight: bold;        
+}
+
+.footer {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/*=== ДОБАВЛЕНО ===*/
+.novbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: 
+    linear-gradient(90deg, #000000, 
+    #0f2027, #2c5364);
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+}
+
+
+.novbar a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    transition: 0.3s;
+ }   
+
+ /* Навидение */
+
+ .novbar a:hover {
+     color: #00eaff;
+     text-shadow: 0 0 10px  #00eaff; 
+ }
+
+
+ .buttons {
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: warp;
+ }
+
+
+ .btn {
+   display: inline-block;
+   padding: 15px 30px;
+   margin: 10px;
+   border-radius: 20px;
+
+   background: 
+   linear-gradient(45deg, #89cdf1,
+   #2200bb);
+   color: white;
+
+   font-size: 16px;
+   font-weight: bold;
+   text-decoration: none;
+
+   box-shadow: 0 5px 15px rgba(0, 0,
+   0, 0.2);
+
+   transition: all 0.3s ease;
+ }
+
+
+ .btn:hover {
+       transform: scale(1.05);
+       background: linear-gradient(45deg, #2193d0,
+       #6dd5ed);
+ }
+
+ .age-badge {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    color: white;
+
+    padding: 8px 12px;
+    border-radius: 10px;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    box-shadow: 0 0 10px
+    rgba(0, 0, 0, 0.5);
+ }
+
+
+ #field {
+    width: 400px;
+    height: 300x;
+    background: #222;
+    position: relative;
+    margin: 20px auto;
+    border: 2px;
+    cursor: crosshair;
+ }
+
+ .enemy {
+    width: 40px;
+    height: 40px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+ }
+
+ .dev {
+    color: orange;
+    font-weight: bolt;
+    margin-bottom: 10px;
+ }
+
+ .top {
+   height: 50vh;
+   background: #222;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: white
+ }
+
+
+ .bottom {
+   height: 50vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+
+.images {
+   display: flex;
+   justify-content: space-around;
+   width: 100%;
+   align-items: center;
+   padding: 0 50px;
+   margin-top: 40px;
+}
+   
+   .images img {
+   width: 250px;
+   height: auto;
+   border-radius: 20px;
+   object-fit: contain;
+   background: #111;
+   box-shadow: 0 10px 20px
+   rgba(0, 0, 0, 0.6);
+   transition: 0.3s;
+}
+
+.cerner-text {
+   position: fixed;
+   top:10px;
+   right: 10px;
+   color: white;
+   padding:6px 8px;
+   border-radius: 5 px;
+   font-size: 10px;
+   z-index: 9999;
+}
+
+
+.support-box {
+   position: fixed;
+   bottom: 20px;
+   left: 20px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   z-index: 9999;
+}
+
+.support-btn {
+   background: #4CAF50;
+   color:white;
+   border: none;
+   padding: 8px 14px;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 0.3s;
+}
+
+.support-btn:hover {
+   background: #45a049;
+   transform: scale(1.05);
+}
+
+.dev-text {
+   color: #ccc;
+   font-size: 12px;
+   opacity: 0.7;
+}
+
+a {
+   color:#2193d0;
+}
