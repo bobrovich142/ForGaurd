@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Forgaurd</title>
+        <link rel="icon" href="FG.ico">
+        <link rel="stylesheet"
+       href="style2.css">
+       <h1>пока игры грузятся играй по онлайн</h1>
+    <body>
+        <main class="main-content">
+        <div class="fullscreeen-bg-slider"></div>
+</main>
+        <div class="cerner-text">
+        Данный сайт не является пиратской версией.<br>
+        безопасный в использовании.
+      </div>
+        <div class="top">
+        <a href="index.html" target="_blank" class="btn-sy">Главная</a>
+      </div>
+        <div class="top-nav">
+            <h2>Игры</h2>
+            <a href="https://2048.io/" class="btn-su">2048</a>
+            <a href="https://pacman.cc/pacman/" class="btn-su">pacman</a>
+            <a href="https://doodlejump-unblocked.gitlab.io/" class="btn-su">Jump</a>
+        </div>
+    <script>
+    const bgImages = ['photo/art1.png', 'photo/art2.png', 'photo/art3.png'];
+    let currentImgIndex = 0;
+
+    function changeBodyBackground() {
+        currentImgIndex = (currentImgIndex + 1) % bgImages.length;
+        const nextTargetImage = bgImages[currentImgIndex];
+        
+        document.body.style.backgroundImage = linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${nextTargetImage}');
+    }
+    setInterval(changeBodyBackground, 5000);
+</script>
+    </body>
+    </head>
+</html>

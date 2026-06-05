@@ -1,7 +1,6 @@
 body {
      margin: 0;
-     font-family: 'Segoe UI', Arial;
-sans-serif;
+     font-family: 'Segoe UI', Arial, sans-serif;
     background: 
     linear-gradient(135deg, #0f2027,
     #203a43, #2c5364);
@@ -87,16 +86,16 @@ p {
 
  .btn {
    display: inline-block;
-   padding: 15px 30px;
+   padding: 5px 5px;
    margin: 10px;
-   border-radius: 20px;
+   border-radius: 30px;
 
    background: 
    linear-gradient(45deg, #89cdf1,
    #2200bb);
    color: white;
 
-   font-size: 16px;
+   font-size: 10px;
    font-weight: bold;
    text-decoration: none;
 
@@ -122,6 +121,7 @@ p {
 
     padding: 8px 12px;
     border-radius: 10px;
+    background-color: #423535;
 
     font-weight: bold;
     font-size: 16px;
@@ -238,4 +238,86 @@ p {
 
 a {
    color:#2193d0;
+}
+
+.button {
+   display: inline-block;
+   padding: 1px 1px;
+   background: transparent;
+   background-color: green;
+   border-radius: 20px;
+   color: green;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.btn {
+   color:white;
+   text-decoration: none;
+   font-weight: bold;
+   font-family: sans-serif;
+   text-align: center;
+   padding: 20px 20px !important;
+   font-size: 14px !important;
+}
+
+.btn-soh {
+    color:white;
+   text-decoration: none;
+   font-weight: bold;
+   font-family: sans-serif;
+   text-align: center;
+   padding: 10px 10px !important;
+   font-size: 14px !important;
+   background: green;
+   background-color: green;
+   border-radius: 8px;
+}
+
+.btn-soh:hover {
+   box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.7 );
+}
+
+.card {
+   border: 2px solid #423e3e;
+   background-color: #1b2d35;
+   border-radius: 10px;
+   padding: 15px;
+   width: 250px;
+   text-align: center;
+   font-family: Arial, sans-serif;
+   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6)
+               0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+   width: 100%;
+   height: auto;
+   border-radius: 5px;
+   object-fit: cover;
+}
+
+.card h3 {
+   margin: 15px 0;
+   font-size: 18px;
+   color: #ffffff;
+}
+
+.buy-btn {
+   background-color: #28a745;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   font-size: 16px;
+   border-radius: 5px;
+   cursor: pointer;
+   width: 100%;
+   transition: backgraund 0.2s;
+}
+
+.buy-btn:hover {
+   background-color: #218838
+}
+.buy-btn:active {
+   transform: scale(0.98);
 }

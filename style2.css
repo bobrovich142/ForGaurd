@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 90vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('photo/art4.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: backgraund-image 2s ease-in-out;
+    color: white;
+    font-family: sans-serif;
+}
+
+.button {
+   display: inline-block;
+   padding: 1px 1px;
+   background: transparent;
+   background-color: green;
+   border-radius: 20px;
+   color: rgb(151, 179, 151);
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.btn {
+   color:white;
+   text-decoration: none;
+   font-weight: bold;
+   font-family: sans-serif;
+   text-align: center;
+   padding: 20px 20px !important;
+   font-size: 14px !important;
+}
+
+.btn-su {
+    display: inline-block;
+   padding: 8px 20px;
+   margin: 5px;
+   border-radius: 10px;
+
+   background: 
+   linear-gradient(45deg, #006411,
+   #00791e);
+   color: rgb(255, 255, 255);
+
+   font-size: 16px;
+   font-weight: bold;
+   text-decoration: none;
+
+   box-shadow: 0 5px 15px rgba(0, 0,
+   0, 0.2);
+
+   transition: all 0.3s ease;
+}
+
+.btn-su:hover {
+transform: scale(1.1);
+       background: linear-gradient(45deg, #008316,
+       #007e30);
+}
+h1 {
+   justify-content: center;
+   align-items: center;
+   color: white;  
+   width: 100%;
+   text-align: center;
+   margin-top: 0;
+   margin-bottom: 0;
+   font-family: sans-serif;
+}
+.main-content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
+   padding-top: 80px;
+   gap: 40px;
+   height: auto;
+   min-height: auto;
+}
+h2 {
+   color: bisque;
+}
+
+.btn-sy {
+   position: absolute;
+   top: 15px;
+   left: 15px;
+   color:white;
+   text-decoration: none;
+   font-weight: bold;
+   font-family: sans-serif;
+   text-align: center;
+   padding: 5px 5px !important;
+   font-size: 14px !important;
+   background: rgb(56, 0, 209);
+   background-color: rgb(3, 0, 207);
+   border-radius: 10px;
+}
+
+.btn-sy:hover{ 
+box-shadow: 0 0 10px rgb(3, 35, 173);
+}
+
+.cerner-text {
+   position: fixed;
+   top:10px;
+   right: 10px;
+   color: white;
+   padding:6px 8px;
+   border-radius: 5 px;
+   font-size: 10px;
+   z-index: 9999;
+}
