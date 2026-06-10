@@ -76,7 +76,8 @@ p {
 
 
  .buttons {
-    margin-top: 30px;
+    margin-top: 10px;
+    padding: 10px 10px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -86,9 +87,9 @@ p {
 
  .btn {
    display: inline-block;
-   padding: 5px 5px;
+   padding: 4px 4px;
    margin: 10px;
-   border-radius: 30px;
+   border-radius: 20px;
 
    background: 
    linear-gradient(45deg, #89cdf1,
@@ -321,3 +322,16 @@ a {
 .buy-btn:active {
    transform: scale(0.98);
 }
+.bage {
+    position: fixed;
+   top: 1px;
+   left: 1px;
+   color:white;
+   text-decoration: none;
+   font-weight: bold;
+   font-family: sans-serif;
+   text-align: center;
+   padding: 5px 10px !important;
+   font-size: 10px !important;
+   border-radius: 5px;
+ }
