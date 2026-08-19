@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FG Admin Panel</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0f;
+            --panel-bg: #13131a;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --accent-color: #9333ea;
+            --text-main: #ffffff;
+            --text-muted: #9494a3;
+            --error-color: #ef4444;
+        }
+        body {
+            margin: 0; font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+        }
+        .auth-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .auth-card { width: 100%; max-width: 400px; background: var(--panel-bg); border-radius: 24px; border: 1px solid var(--border-color); padding: 32px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); box-sizing: border-box; }
+        .auth-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; text-align: center; letter-spacing: -0.5px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+        .input-group input { width: 100%; padding: 14px 16px; background: #1c1c24; border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-size: 16px; box-sizing: border-box; transition: border-color 0.3s; }
+        .input-group input:focus { outline: none; border-color: var(--accent-color); }
+        .auth-btn { width: 100%; padding: 14px; background: var(--accent-color); border: none; border-radius: 12px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: opacity 0.3s; }
+        .auth-btn:hover { opacity: 0.9; }
+        .error-msg { color: var(--error-color); font-size: 14px; margin-bottom: 16px; text-align: center; display: none; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 8px; }
+        
+        /* ДЕШБОРД */
+        .dashboard { display: none; min-height: 100vh; }
+        .header-admin { height: 60px; background: var(--panel-bg); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; letter-spacing: 2px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        .main-layout { display: flex; padding-top: 60px; min-height: calc(100vh - 60px); }
+        .sidebar { width: 260px; background: var(--panel-bg); border-right: 1px solid var(--border-color); padding: 24px 16px; position: fixed; top: 60px; bottom: 0; left: 0; box-sizing: border-box; }
+        .menu-btn { width: 100%; padding: 14px 20px; background: transparent; border: none; border-radius: 12px; color: var(--text-muted); text-align: left; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 8px; transition: all 0.3s; }
+        .menu-btn:hover, .menu-btn.active { background: rgba(147, 51, 234, 0.1); color: var(--accent-color); }
+        .content-area { margin-left: 260px; padding: 40px; flex-grow: 1; box-sizing: border-box; }
+        .welcome-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; color: #fff; }
+        .card-view { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 32px; max-width: 600px; }
+    </style>
+</head>
+<body>
 
+    <!-- ОКНО СИСТЕМНОГО ВХОДА -->
+    <div id="auth-screen" class="auth-container">
+        <div class="auth-card">
+            <h2 id="form-title" class="auth-title">Вход в систему</h2>
+            <div id="error-box" class="error-msg"></div>
+            <div class="input-group">
+                <label>Имя администратора</label>
+                <input type="text" id="auth-user" placeholder="Логин">
+            </div>
+            <div class="input-group">
+                <label>Секретный пароль</label>
+                <input type="password" id="auth-pass" placeholder="••••••••">
+            </div>
+            <button id="submit-auth-btn" class="auth-btn">Войти</button>
+        </div>
+    </div>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА ПАНЕЛИ -->
+    <div id="dashboard-screen" class="dashboard">
+        <header class="header-admin">HEADER FG ADMIN</header>
+        <div class="main-layout">
+            <aside class="sidebar">
+                <button class="menu-btn active" onclick="switchTab('console')">Консоль</button>
+                <button class="menu-btn" onclick="location.href='profile.html'">Аккаунт</button>
+                <button class="menu-btn" onclick="switchTab('servers')">Сервера</button>
+            </aside>
+            <main class="content-area">
+                <h1 class="welcome-title">Добро пожаловать, админ!</h1>
+                <div id="console-tab" class="card-view">
+                    <h3>Главная системная консоль</h3>
+                    <p style="color: var(--text-muted)">Связь со скрытым сервером хранения активна. Защита 10-дневного бана взведена.</p>
+                </div>
+                <div id="servers-tab" class="card-view" style="display: none;">
+                    <h3>Управление серверами</h3>
+                    <p style="color: var(--text-muted)">Конфигурации баз данных синхронизированы.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let isRegistered = localStorage.getItem('fg_admin_created') === 'true';
+        let attempts = parseInt(localStorage.getItem('fg_login_attempts') || '0');
+        let lockedTime = localStorage.getItem('fg_lock_until');
+
+        const submitBtn = document.getElementById('submit-auth-btn');
+        const errorBox = document.getElementById('error-box');
+
+        function checkSystemStatus() {
+            const now = Date.now();
+            if (lockedTime && now < parseInt(lockedTime)) {
+                const remains = parseInt(lockedTime) - now;
+                const days = Math.ceil(remains / (1000 * 60 * 60 * 24));
+                showError(`Превышено 10 попыток входа! Доступ заблокирован на 10 дней.`);
+                submitBtn.disabled = true;
+                return;
+            }
+            if (!isRegistered) {
+                document.getElementById('form-title').innerText = "Регистрация FG Admin";
+                submitBtn.innerText = "Создать аккаунт";
+            }
+        }
+
+        function showError(t) { errorBox.innerText = t; errorBox.style.display = 'block'; }
+
+        submitBtn.addEventListener('click', () => {
+            const u = document.getElementById('auth-user').value;
+            const p = document.getElementById('auth-pass').value;
+            if(!u || !p) { showError("Заполните поля формы!"); return; }
+
+            if (!isRegistered) {
+                // ПЕРВАЯ РЕГИСТРАЦИЯ
+                localStorage.setItem('fg_user', u);
+                localStorage.setItem('fg_pass', p);
+                localStorage.setItem('fg_admin_created', 'true');
+                localStorage.setItem('fg_login_attempts', '0');
+                isRegistered = true;
+                alert('Администратор успешно создан! Перенаправление на форму входа...');
+                location.reload();
+            } else {
+                // ЛОГИКА АВТОРИЗАЦИИ И БАНА
+                if(u === localStorage.getItem('fg_user') && p === localStorage.getItem('fg_pass')) {
+                    localStorage.setItem('fg_login_attempts', '0');
+                    document.getElementById('auth-screen').style.display = 'none';
+                    document.getElementById('dashboard-screen').style.display = 'block';
+                } else {
+                    attempts++;
+                    localStorage.setItem('fg_login_attempts', attempts);
+                    if(attempts >= 10) {
+                        const banDate = Date.now() + (10 * 24 * 60 * 60 * 1000);
+                        localStorage.setItem('fg_lock_until', banDate);
+                        showError("Вы заблокированы на 10 дней за 10 неверных попыток входа!");
+                        submitBtn.disabled = true;
+                    } else {
+                        showError(`Неверный пароль! Осталось попыток: ${10 - attempts}`);
+                    }
+                }
+            }
+        });
+
+        function switchTab(t) {
+            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('console-tab').style.display = 'none';
+            document.getElementById('servers-tab').style.display = 'none';
+            document.getElementById(t + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+        checkSystemStatus();
+    </script>
+</body>
+</html>
