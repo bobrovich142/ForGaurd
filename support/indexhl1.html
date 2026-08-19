@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Поддержка Чат</title>
+    <link rel="icon" type="image/png" href="photo/log.png">
+    <link rel="stylesheet" href="style4.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <script src="https://telegram.org"></script>
+</head>
+<body>
+
+    <!-- Шапка (Лого и Название как на 1 сайте) -->
+    <header class="navbar">
+        <button class="back-btn" onclick="window.history.back()"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="logo">
+            <div class="logo-icon">FG</div>
+            <div class="logo-text">
+                <span>ЧАТ</span>
+                <span class="badge">MINI APP</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="action-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Основной контейнер чата -->
+    <main class="chat-container">
+        
+        <!-- Окно с сообщениями -->
+        <div class="chat-messages" id="chat-messages">
+            <!-- Сюда сообщения добавляются через JavaScript -->
+        </div>
+
+        <!-- Нижняя панель ввода сообщения -->
+        <div class="chat-input-area">
+            <form class="chat-form" id="message-form" onsubmit="handleFormSubmit(event)">
+                <input type="text" id="user-input" placeholder="Введите номер ответа" required autocomplete="off">
+                <button type="submit" class="chat-send-btn" id="send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+<script>
+    // Инициализация Telegram WebApp API
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.ready();
+    }
+
+    // НАСТРОЙКА: Замените 'site_support_bot' на юзернейм вашего реального Telegram-бота БЕЗ знака @
+    const TELEGRAM_BOT_USERNAME = 'site_support_bot'; 
+
+    const messagesContainer = document.getElementById('chat-messages');
+    const inputElement = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-btn');
+
+    // Переменная для отслеживания состояния (ждет ли бот описание бага)
+    let waitingForBugDescription = false;
+
+    // Текст главного меню бота с описанием каждой цифры
+    const botMenuText = "Пожалуйста, выберите нужный пункт меню, отправив цифру ответа:\n\n1 — У вас возник баг\n2 — Если деньги не засчитались\n3 — Если сайт не работает";
+
+    // Список запрещенных слов (оскорблений) для проверки. Сюда можно дописывать любые маты.
+    const badWords = [
+        "дурак", "сука", "блять", "хуй", "шлюха", "пидор", "гандон", 
+        "даун", "лох", "тварь", "мразь", "урод", "еблан", "чмо"
+    ];
+
+    // Функция завершения разговора и блокировки чата
+    function closeChatSystem(reasonText) {
+        appendMessage(reasonText, "bot");
+        
+        // Полная блокировка интерфейса чата
+        setTimeout(() => {
+            appendMessage("📴 Разговор завершен технической поддержкой.", "bot");
+            inputElement.disabled = true;
+            inputElement.placeholder = "Чат закрыт...";
+            sendButton.disabled = true;
+            sendButton.style.opacity = "0.5";
+        }, 500);
+    }
+
+    // Функция вывода сообщений в чат
+    function appendMessage(text, sender, isLink = false, linkUrl = "") {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message', sender === 'user' ? 'user-msg' : 'bot-msg');
+        
+        if (isLink) {
+            msgDiv.innerHTML = `${text.replace(/\n/g, '<br>')}<br><br><a href="${linkUrl}" target="_blank" class="tg-redirect-btn"><i class="fa-brands fa-telegram"></i> Отправить в Telegram</a>`;
+        } else {
+            msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+        }
+        
+        messagesContainer.appendChild(msgDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Логика ответов ИИ-помощника
+    function triggerBotReply(userInputText) {
+        setTimeout(() => {
+            const cleanText = userInputText.trim().toLowerCase(); // Переводим в нижний регистр для точной проверки
+
+            // ПРОВЕРКА НА ОСКОРБЛЕНИЯ И МАТ:
+            // Проверяем, содержит ли введенный текст хотя бы одно слово из черного списка
+            const hasBadWord = badWords.some(word => cleanText.includes(word));
+            
+            if (hasBadWord) {
+                closeChatSystem("🤖 Оскорбления в чате поддержки строго запрещены! Вы заблокированы за нарушение правил общения.");
+                return; // Полностью останавливаем выполнение кода бота
+            }
+
+            // Если бот на предыдущем шаге попросил описать баг (Пункт 1)
+            if (waitingForBugDescription) {
+                waitingForBugDescription = false;
+                const tgLink = `https://t.me{TELEGRAM_BOT_USERNAME}?start=${encodeURIComponent('bug_' + userInputText.trim())}`;
+                
+                appendMessage("🤖 Текст бага зафиксирован! сообщим этот баг нашему Telegram-боту:", "bot", true, tgLink);
+                return;
+            }
+
+            // Стандартное меню цифр 1, 2, 3
+            if (cleanText === "1") {
+                appendMessage("🤖 Какой баг возник?", "bot");
+                waitingForBugDescription = true; // Включаем режим ожидания описания бага
+            } 
+            else if (cleanText === "2") {
+                appendMessage("🤖 Обратитесь, пожалуйста, в тикток личный чат forgaurd_site.", "bot");
+            } 
+            else if (cleanText === "3") {
+                const tgLink = `https://t.me{TELEGRAM_BOT_USERNAME}?start=site_not_working`;
+
+                appendMessage("🤖 Хорошо, передам администратору!", "bot");
+                
+                setTimeout(() => {
+                    appendMessage("🤖 Нажмите кнопку ниже, чтобы отправить сигнал администратору в ЛС:", "bot", true, tgLink);
+                    closeChatSystem("🤖 Заявка сформирована.");
+                }, 600);
+            } 
+            else {
+                appendMessage(`🤖 Извините, я вас не понял. Пожалуйста, введите только цифру 1, 2 или 3.\n\n${botMenuText}`, "bot");
+            }
+        }, 600);
+    }
+
+    // Отправка текста через кнопку-стрелку
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const text = inputElement.value.trim();
+
+        if (text !== "") {
+            appendMessage(text, "user");
+            inputElement.value = ""; 
+            triggerBotReply(text); 
+        }
+    }
+
+    // Автоматический запуск при загрузке страницы
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialMessage = urlParams.get('msg');
+
+        if (initialMessage && initialMessage.trim() !== "") {
+            appendMessage(initialMessage, "user");
+            setTimeout(() => {
+                appendMessage(`🤖 Здравствуйте! Я принял ваше обращение с главной страницы: "${initialMessage}".\n\n${botMenuText}`, "bot");
+            }, 400);
+        } else {
+            appendMessage(`🤖 Здравствуйте! Добро пожаловать в чат поддержки.\n\n${botMenuText}`, "bot");
+        }
+    });
+</script>
+</body>
+</html>

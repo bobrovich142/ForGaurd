@@ -1,0 +1,268 @@
+:root {
+    --bg-dark-app: #030604;
+    --bg-block-card: #080d0a;
+    --bg-inner-element: #0d1410;
+    --border-line: #121c16;
+    --neon-green-accent: #0ec243;
+    --text-pure-white: #ffffff;
+    --text-muted-gray: #718377;
+    --text-light-gray: #a6b8ad;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark-app);
+    color: var(--text-pure-white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--bg-dark-app);
+    border-bottom: 1px solid var(--border-line);
+    flex-shrink: 0;
+}
+
+.back-btn, .action-btn {
+    background: none;
+    border: none;
+    color: var(--text-pure-white);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--neon-green-accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-green-accent);
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text span:first-child {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.logo-text .badge {
+    font-size: 8px;
+    color: var(--neon-green-accent);
+    font-weight: bold;
+    margin-top: -2px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-dark-app);
+    position: relative;
+    height: calc(100vh - 51px);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 80px;
+}
+
+.message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.bot-msg {
+    background-color: var(--bg-block-card);
+    border: 1px solid var(--border-line);
+    color: var(--text-light-gray);
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+}
+
+.user-msg {
+    background-color: #0e3a1d;
+    border: 1px solid rgba(14, 194, 67, 0.3);
+    color: var(--text-pure-white);
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+}
+
+.chat-input-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-dark-app);
+    padding: 12px 16px env(safe-area-inset-bottom);
+    border-top: 1px solid var(--border-line);
+    z-index: 20;
+}
+
+.chat-form {
+    display: flex;
+    gap: 8px;
+    background-color: var(--bg-inner-element);
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    padding: 6px 10px;
+    align-items: center;
+}
+
+.chat-form input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-pure-white);
+    font-size: 13px;
+    font-family: inherit;
+    padding: 8px 4px;
+}
+
+.chat-form input:disabled {
+    color: var(--text-muted-gray);
+    cursor: not-allowed;
+}
+
+.chat-form input::placeholder {
+    color: var(--text-muted-gray);
+}
+
+.chat-send-btn {
+    background-color: transparent !important; /* Прозрачный фон */
+    border: 2px solid #f1c40f !important;    /* Четкая желтая рамка */
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;           /* Скругление углов */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.15); /* Золотистое свечение */
+    position: relative !important;
+    overflow: hidden !important;             /* Прячем блик по краям */
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.1s !important;
+}
+
+/* Маленький белый треугольник строго по центру */
+.chat-send-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 12px !important;
+    height: 12px !important;
+    background-color: #ffffff !important;    /* Белый цвет треугольника */
+    clip-path: polygon(0% 0%, 0% 100%, 100% 50%) !important;
+    margin-left: 2px !important;             /* Идеальная оптическая центровка */
+    z-index: 2 !important;
+    transition: background-color 0.2s !important;
+}
+
+/* Наклонная световая полоса (глянцевый блик) */
+.chat-send-btn::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -150% !important;
+    width: 50% !important;
+    height: 100% !important;
+    background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    transform: skewX(-25deg) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+/* Запуск замедленной анимации пролета линии (1.2 секунды) при клике или тапе */
+.chat-send-btn:hover::after,
+.chat-send-btn:active:not(:disabled)::after {
+    animation: flare-animation 1.2s ease-in-out forwards !important;
+}
+
+/* Кнопка заливается желтым цветом, а треугольник становится темным */
+.chat-send-btn:hover,
+.chat-send-btn:active:not(:disabled) {
+    background-color: #f1c40f !important;
+    box-shadow: 0 0 12px rgba(241, 196, 15, 0.4) !important;
+}
+
+.chat-send-btn:hover::before,
+.chat-send-btn:active:not(:disabled)::before {
+    background-color: #030604 !important; /* Треугольник темнеет на желтом фоне */
+}
+
+/* Эффект легкого сжатия при нажатии пальцем на телефоне */
+.chat-send-btn:active:not(:disabled) {
+    transform: scale(0.95) !important;
+}
+
+/* Скрываем старую иконку-самолетик, если она пытается отобразиться из HTML */
+.chat-send-btn i {
+    display: none !important;
+}
+
+/* Заблокированная кнопка (когда бот завершает диалог на третьем пункте) */
+.chat-send-btn:disabled {
+    border-color: #3a351c !important;
+    background-color: transparent !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+.chat-send-btn:disabled::before {
+    background-color: #718377 !important; /* Серый тусклый треугольник */
+}
+
+/* Анимация движения линии */
+@keyframes flare-animation {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}

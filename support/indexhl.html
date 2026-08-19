@@ -1,1 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Поддержка FG</title>
+    <link rel="icon" type="image/png" href="photo/log.png">
+    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <script src="https://telegram.org"></script>
+    <script>
+        // Инициализация Telegram Mini App SDK
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+        }
 
+        // Умная функция перенаправления на второй сайт (в чат)
+        function redirectToChat() {
+            const messageInput = document.getElementById('chat-input');
+            const messageText = messageInput.value.trim();
+
+            if (messageText !== "") {
+                // Если текст в поле ввода есть, переносим его на 2 сайт в строку запроса
+                window.location.href = `indexhl1.html?msg=${encodeURIComponent(messageText)}`;
+            } else {
+                // Если поле пустое, просто перенаправляем на страницу чата
+                window.location.href = 'indexhl1.html';
+            }
+        }
+
+        // Функции для управления всплывающим окном "О нас"
+        function openAboutModal() {
+            document.getElementById('about-modal').classList.add('active');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('about-modal').classList.remove('active');
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Верхний навигационный хэдер -->
+    <header class="navbar">
+        <button class="back-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="logo">
+            <div class="logo-icon">FG</div>
+            <div class="logo-text">
+                <span>Поддержка</span>
+                <span class="badge">MINI APP</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="action-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы -->
+    <main class="container">
+        
+        <!-- Приветственный блок со светящимся кругом, который плавает вдоль стен -->
+        <section class="hero-section">
+            <!-- Элемент для плавающего градиентного фона -->
+            <div class="floating-glow-bg"></div>
+
+            <div class="hero-left">
+                <h1>Поддержка <span class="highlight">Сайта</span></h1>
+                <p>Мы всегда готовы помочь вам! Если у вас возникли вопросы, проблемы или предложения — свяжитесь с нами удобным способом.</p>
+            </div>
+            <div class="hero-right">
+                <div class="headset-graphic">
+                    <i class="fa-solid fa-headphones"></i>
+                    <div class="dots-bubble"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок способов связи (Две аккуратные узкие карточки в одну строчку) -->
+        <section class="content-block">
+            <h2 class="section-title"><span class="dot-green"></span> Способы связи</h2>
+            <div class="methods-grid">
+                
+                <!-- Карточка 1: Настоящий Telegram -->
+                <div class="method-card">
+                    <div class="card-icon tg-color">
+                        <!-- Ваша собственная картинка вместо иконки -->
+                        <img src="photo/Telegram_logo.svg.webp" alt="TG" class="custom-tg-icon">
+                    </div>
+                    <h3>Telegram</h3>
+                    <p class="card-sub">Поддержка</p>
+                    <a href="https://t.me/Fg_help_site_bot" class="card-action-btn">Написать</a>
+                </div>
+
+                <!-- Карточка 2: Встроенный Онлайн-чат (Ваш второй сайт) -->
+                <div class="method-card">
+                    <div class="card-icon chat-color">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3>Онлайн-чат</h3>
+                    <p class="card-sub">В приложении</p>
+                    <a href="indexhl1.html" class="card-action-btn">Открыть чат</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Информационный блок статуса 24/7 -->
+        <section class="status-panel">
+            <div class="status-left">
+                <h3>Мы на связи <span>24/7</span></h3>
+                <p>Среднее время ответа — несколько минут.</p>
+                <div class="online-indicator">
+                    <span class="pulse-dot"></span> Сейчас онлайн
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="circle-timer-graphic">
+                    <i class="fa-solid fa-arrow-up-long status-arrow"></i>
+                    <span class="timer-text">24/7</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок быстрого обращения с текстовым полем ввода -->
+        <section class="content-block chat-block">
+            <h2 class="section-title"><span class="dot-green"></span> Быстрое обращение</h2>
+            <div class="chat-form">
+                <input type="text" id="chat-input" placeholder="Опишите вашу проблему..." autocomplete="off">
+                <!-- Кастомная кнопка-стрелка, запускающая умный переход на 2-й сайт -->
+                <button type="button" class="chat-send-btn" onclick="redirectToChat()"></button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Всплывающее модальное окно "О нас" -->
+    <div class="modal-overlay" id="about-modal" onclick="closeAboutModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-info-circle text-green"></i> О нашем проекте</h3>
+                <button class="close-modal-btn" onclick="closeAboutModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Добро пожаловать в поддержку сайта FG здесь вы можете описать вашу ошибку админу. будем рады вашему сообщению;).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижний инвентарь (Только 2 нужные вкладки) -->
+    <footer class="app-bottom-bar">
+        <a href="#" class="tab-item active-dome">
+            <i class="fa-solid fa-headphones"></i>
+            <span>Поддержка</span>
+        </a>
+        <a href="#" class="tab-item" onclick="openAboutModal(); return false;">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>О нас</span>
+        </a>
+    </footer>
+
+    <!-- Дополнительный скрипт для обработки нажатия Enter в поле ввода -->
+    <script>
+        document.getElementById('chat-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Запрещаем стандартную отправку
+                redirectToChat();       // Перенаправляем по нашей логике
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+:root {
+    --bg-dark-app: #030604;
+    --bg-block-card: #080d0a;
+    --bg-inner-element: #0d1410;
+    --border-line: #121c16;
+    --neon-green-accent: #0ec243;
+    --text-pure-white: #ffffff;
+    --text-muted-gray: #718377;
+    --text-light-gray: #a6b8ad;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark-app);
+    color: var(--text-pure-white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding-bottom: 90px;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Хэдер */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--bg-dark-app);
+    border-bottom: 1px solid var(--border-line);
+}
+
+.back-btn, .action-btn {
+    background: none;
+    border: none;
+    color: var(--text-pure-white);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--neon-green-accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-green-accent);
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text span:first-child {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.logo-text .badge {
+    font-size: 8px;
+    color: var(--neon-green-accent);
+    font-weight: bold;
+    margin-top: -2px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 16px;
+}
+
+/* Контейнер */
+.container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Приветствие */
+.hero-section {
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Стили для светящегося круга на заднем фоне */
+.floating-glow-bg {
+    position: absolute;
+    
+    /* Размещаем круг строго по центру приветственной секции */
+    top: 50%;
+    left: 50%;
+    /* Сдвигаем назад на половину своей ширины и высоты для идеальной центровки */
+    transform: translate(-50%, -50%); 
+    
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    
+    /* Красивый сочный радиальный градиент */
+    background: radial-gradient(circle, rgba(241, 196, 15, 0.28) 0%, rgba(14, 194, 67, 0.08) 55%, rgba(0,0,0,0) 70%);
+    
+    z-index: 1; /* Оставляем позади текста и наушников */
+    pointer-events: none;
+    
+    /* Запуск бесконечной плавной анимации изменения размера и размытия (на 5 секунд) */
+    animation: breathing-glow 5s ease-in-out infinite;
+}
+
+/* Убеждаемся, что текст и наушники стоят поверх анимированного фона */
+.hero-left, .hero-right {
+    position: relative;
+    z-index: 2; 
+}
+
+/* Описание анимации: только размер (scale) и степень размытия (blur) */
+@keyframes breathing-glow {
+    0% {
+        /* Исходное состояние: стандартный размер, базовое мягкое размытие */
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(15px);
+    }
+    50% {
+        /* В середине цикла круг сильно расширяется (на 40%), а размытие уменьшается, делая его контуры четче и ярче */
+        transform: translate(-50%, -50%) scale(1.4);
+        filter: blur(5px);
+    }
+    100% {
+        /* Плавное возвращение к исходному состоянию для бесшовного зацикливания */
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(15px);
+    }
+}
+
+/* Наушники справа остаются стабильными */
+.headset-graphic {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(14, 194, 67, 0.1) 0%, rgba(0,0,0,0) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dots-bubble {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    background-color: var(--neon-green-accent);
+    color: var(--bg-dark-app);
+    font-weight: bold;
+    padding: 0px 6px 4px 6px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 10px;
+}
+
+/* Блоки */
+.content-block {
+    background-color: var(--bg-block-card);
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.dot-green {
+    width: 5px;
+    height: 5px;
+    background-color: var(--neon-green-accent);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px var(--neon-green-accent);
+}
+
+.methods-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Карточки с анимацией поднятия и неонового свечения */
+.method-card {
+    background-color: var(--bg-inner-element);
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    
+    /* Плавность для анимации всех свойств (границы, тени, подъем) */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Анимация при наведении мыши ИЛИ при нажатии пальцем на телефоне */
+.method-card:hover,
+.method-card:active {
+    transform: translateY(-5px); /* Карточка плавно приподнимается вверх */
+    border-color: var(--neon-green-accent); /* Рамка становится ярко-зеленой */
+    
+    /* Сочное неоновое зеленое свечение вокруг всей карточки */
+    box-shadow: 0 6px 20px rgba(14, 194, 67, 0.25), 
+                0 0 10px rgba(14, 194, 67, 0.15);
+}
+
+/* Иконки-подложки */
+.card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    transition: transform 0.3s ease;
+}
+
+/* Дополнительный милый эффект: иконка внутри карточки слегка увеличивается при фокусе */
+.method-card:hover .card-icon,
+.method-card:active .card-icon {
+    transform: scale(1.08);
+}
+
+.tg-color { background-color: rgba(14, 194, 67, 0.1); }
+.chat-color { background-color: rgba(14, 194, 67, 0.1); color: var(--neon-green-accent); font-size: 15px; }
+.custom-tg-icon { width: 18px; height: 18px; object-fit: contain; }
+.method-card h3 { font-size: 11px; font-weight: 600; margin-bottom: 2px; }
+.card-sub { color: var(--text-muted-gray); font-size: 9px; margin-bottom: 10px; min-height: 14px; }
+
+/* Кнопка внутри карточки с анимацией перехода в желтый цвет */
+.card-action-btn {
+    width: 100%;
+    max-width: 90px;
+    background-color: rgba(14, 194, 67, 0.05);
+    border: 1px solid rgba(14, 194, 67, 0.2);
+    color: var(--neon-green-accent);
+    font-size: 10px;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    position: relative; /* Обязательно для позиционирования линии блика внутри */
+    overflow: hidden;   /* Прячем белую линию, когда она вылетает за границы кнопки */
+    
+    transition: background-color 0.25s ease, 
+                border-color 0.25s ease, 
+                color 0.25s ease, 
+                box-shadow 0.25s ease;
+}
+
+/* Эффект наведения/нажатия на саму КНОПКУ внутри карточки */
+.card-action-btn:hover,
+.card-action-btn:active {
+    background-color: #f1c40f; /* Фон кнопки становится ярко-желтым */
+    border-color: #f1c40f;     /* Рамка подстраивается под желтый цвет */
+    color: #030604;            /* Текст становится темно-черным для читаемости */
+    box-shadow: 0 0 12px rgba(241, 196, 15, 0.4); /* Золотистое свечение */
+}
+
+/* Создаем белую глянцевую линию (блик) внутри кнопки */
+.card-action-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%; /* Изначально прячем линию далеко слева за пределами кнопки */
+    width: 50%;
+    height: 100%;
+    /* Полупрозрачный белый градиент в форме наклонной полосы */
+    background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg); /* Наклоняем линию, чтобы она пролетала под углом */
+    pointer-events: none;     /* Чтобы линия не мешала кликам */
+}
+
+/* Запуск анимации пролетающей линии при наведении или нажатии */
+.card-action-btn:hover::after,
+.card-action-btn:active::after {
+    animation: flare-animation 1.2s ease-in-out forwards;
+}
+
+/* Описание анимации: линия быстро пробегает слева направо */
+@keyframes flare-animation {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 150%; /* Улетает полностью направо за пределы кнопки */
+    }
+}
+
+/* Статус 24/7 */
+.status-panel {
+    background-color: var(--bg-block-card);
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-left h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.status-left h3 span {
+    color: var(--neon-green-accent);
+}
+
+.status-left p {
+    color: var(--text-muted-gray);
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.online-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-light-gray);
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--neon-green-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon-green-accent);
+}
+
+.circle-timer-graphic {
+    width: 65px;
+    height: 65px;
+    border: 2px dashed rgba(14, 194, 67, 0.4);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.status-arrow {
+    font-size: 10px;
+    color: var(--neon-green-accent);
+    position: absolute;
+    top: 6px;
+    transform: rotate(45deg);
+}
+
+.timer-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--neon-green-accent);
+}
+
+/* Чат блок */
+.chat-form {
+    display: flex;
+    gap: 8px;
+    background-color: var(--bg-inner-element);
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    padding: 6px 10px;
+    align-items: center;
+}
+
+.chat-form input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-pure-white);
+    font-size: 13px;
+    padding: 8px 4px;
+}
+
+.chat-form input::placeholder {
+    color: var(--text-muted-gray);
+}
+
+.chat-send-btn {
+    background-color: transparent;      /* Прозрачный фон внутри кнопки */
+    border: 2px solid #f1c40f;          /* Желтая рамка вокруг кнопки */
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;                 /* Скругленные углы рамки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.15); /* Мягкое желтое свечение */
+    position: relative;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.1s;
+}
+
+/* Создаем маленький белый треугольник внутри кнопки вместо старой иконки */
+.chat-send-btn::before {
+    content: '';
+    position: absolute;
+    width: 12px;                        /* Маленький размер треугольника */
+    height: 12px;
+    background-color: #ffffff;          /* Белый цвет треугольника */
+    /* Обрезаем этот белый квадратик, превращая его в треугольник носиком вправо */
+    clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
+    /* Небольшое смещение вправо для идеальной оптической центровки внутри рамки */
+    margin-left: 2px; 
+    transition: background-color 0.2s;
+}
+
+/* Убираем старую иконку-стрелочку, если она осталась в HTML, чтобы она не мешала */
+.chat-send-btn i {
+    display: none !important;
+}
+
+/* Эффект при нажатии на кнопку пальцем */
+.chat-send-btn:active:not(:disabled) {
+    background-color: rgba(241, 196, 15, 0.15); /* Внутри кнопки появляется легкий желтый фон */
+    transform: scale(0.95);             /* Эффект легкого вдавливания */
+}
+
+/* Стиль для заблокированной кнопки (когда бот на 2 сайте заканчивает диалог) */
+.chat-send-btn:disabled {
+    border-color: #3a351c;              /* Тусклая рамка */
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Тусклый треугольник у заблокированной кнопки */
+.chat-send-btn:disabled::before {
+    background-color: #718377;          /* Серый цвет треугольника */
+}
+
+/* ОБНОВЛЕННЫЙ НИЖНИЙ ИНВЕНТАРЬ (МЕНЮ НА 2 КНОПКИ) */
+.app-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    background-color: #050906;
+    border-top: 1px solid var(--border-line);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 100;
+}
+
+.tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted-gray);
+    width: 50%; /* Равное распределение на 2 колонки */
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.tab-item i {
+    font-size: 18px;
+}
+
+.tab-item span {
+    font-size: 10px;
+}
+
+/* НЕОНОВЫЙ КУПОЛ ДЛЯ ВЫДЕЛЕННОЙ ПОДДЕРЖКИ */
+.tab-item.active-dome {
+    color: var(--neon-green-accent);
+}
+
+.tab-item.active-dome::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 100%;
+    background: radial-gradient(circle at top, rgba(14, 194, 67, 0.22) 0%, rgba(0, 0, 0, 0) 65%);
+    pointer-events: none;
+}
+
+.tab-item.active-dome::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 30%;
+    right: 30%;
+    height: 2px;
+    background-color: var(--neon-green-accent);
+    box-shadow: 0 0 10px var(--neon-green-accent), 0 0 20px var(--neon-green-accent);
+}
+
+/* МОДАЛЬНОЕ ОКНО "О НАС" */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--bg-block-card);
+    border: 1px solid var(--border-line);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 340px;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(14, 194, 67, 0.15);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-line);
+    padding-bottom: 10px;
+}
+
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.text-green {
+    color: var(--neon-green-accent);
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted-gray);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: var(--text-pure-white);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-body p {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-light-gray);
+}
+
+.highlight {
+    color:#0ec243
+}
