@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="FG.ico"
+    type="image/x-icon">
 
+         <meta http-equiv="Content-Security-Policy"
+    content="default-scr 
+  'self'; script-scr 'self'; style-scr
+  'self';">
+        <title>Forgaurd</title>
+
+        <link rel="stylesheet"
+        href="style5.css">
+        <link rel="stylesheet"
+       href="script2.js">
+        <header class="site-header">
+        <div class="header-left">
+          <img src="LOGI.png" alt="логотип" class="header-logo">
+          <span class="header-title">FORGAURD</span>
+          <nav class="header-right">
+          <a href="https://forgaurd.duckdns.org/" class="header-btn">Главная</a>
+          <a href="index2.html" class="header-btn">Онлайн игры</a>
+          </header>
+    </head>
+   <body>
+    <br>
+    <h2> игры лаунчера</h2>
+    <br>
+     <hr class="cyber-line">
+     <div class="main-row"></div>
+     <div class="cyber-lint"></div>
+  <button id="openModalBtn" class="open-btn" onclick="document.getElementById('cardsModal').classList.add('active')">Выбрать карту</button>
+
+<!-- Само модальное окно -->
+<div id="cardsModal" class="modal-overlay">
+  <div class="modal-window">
+    
+    <!-- Шапка окна -->
+    <div class="modal-header">
+      <h3>Выберите карту</h3>
+      <button class="close-btn" onclick="document.getElementById('cardsModal').classList.remove('active')">&times;</button>
+    </div>
+
+    <!-- Контейнер для карточек (они идут в ряд с отступами по бокам) -->
+    <div class="modal-cards-row">
+      
+      <!-- Карточка 1 -->
+      <div class="selectable-card" onclick="selectCard(this, 'Карта 1')">
+        <div class="card">
+          <img src="photo/shake_in_python.jpg" alt="статус">
+              <h3>PONG Игра</h3>
+              <p2> цена: Бесплатно </p2> 
+              <a href=""
+              class="buy-btn">играть</a></div> </div>
+
+      <!-- Карточка 2 -->
+      <div class="selectable-card" onclick="selectCard(this, 'Карта 2')">
+        <div class="card">
+          <img src="photo/shake_in_python.jpg" alt="статус">
+              <h3>PONG Игра</h3>
+              <p2> цена: Бесплатно </p2> 
+              <a href=""
+              class="buy-btn">играть</a></div> </div>
+
+      <!-- Карточка 3 -->
+      <div class="selectable-card" onclick="selectCard(this, 'Карта 3')">
+        <div class="card">
+          <img src="photo/shake_in_python.jpg" alt="статус">
+              <h3>PONG Игра</h3>
+              <p2> цена: Бесплатно </p2> 
+              <a href=""
+              class="buy-btn">играть</a></div> </div>
+      
+    </div>
+
+  </div>
+</div>
+    <a href="indexhl.html" target="_blank" class="round-link-btn" title="поддержка">
+      <span class="btn-question">?</span>
+    </a>
+    <div class="bage">V3.0</div>
+    <div class="age-badge">14+</div>
+   </body>
+</html>
