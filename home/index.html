@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="FG.ico"
+    type="image/x-icon">
 
+        <!--Базовая защита-->
+        <meta 
+http-equiv="Content-Security-Policy"
+    content="default-scr 
+  'self'; script-scr 'self'; style-scr
+  'self';">
+       <title> Forgaurd </title>
+
+       <!--Подключение CSS-->
+       <link rel="stylesheet"
+       href="style.css">
+       <link rel="stylesheet"
+       href="script.js">
+       <link rel="stylesheet"
+       href="server.js">
+
+       <header class="site-header">
+        <div class="header-left">
+          <img src="LOGI.png" alt="логотип" class="header-logo">
+          <span class="header-title">FORGAURD</span>
+        </div>
+        <nav class="header-right">
+          <a href="index2.html" class="header-btn">Онлайн игры</a>
+          <a href="index3.html" class="header-btn">Игры Лаунчера</a>
+        </nav>
+      <div class="account-trigger" onclick="toggleAuthModal()">
+    <span class="user-icon"></span> Аккаунт
+   </div>
+
+  <div id="authModal" class="auth-overlay" onclick="closeauthModal(event)">
+    <div class="auth-box">
+      <div class="auth-close" onclick="toggleAuthModal()">❌</div>
+
+      <h2 class="auth-title">FORGAURD <span class="highlight">ID</span></h2>
+
+      <from id="authFrom" onsubmit="handleAuth(event)">
+        <div class="input-group">
+         <input type="text" id="authLogin" required placeholder=" ">
+         <label>Логин</label>
+        </div>
+
+        <div class="input-group">
+             <input type="password" id="authPossword" required placeholder=" ">
+             <label>Пороль</label>
+        </div>
+
+      <button type="submit" class="auth-submit-btn">Войти в Аккаунт</button>
+      </from>
+
+      <p class="auth-switch">Нет Аккаунта?<a href="" onclick="alert('Регистрация времменно доступна через Лаунчер!')">Создать Профиль</a></p>
+    </div>
+  </div>
+<div id="video-preloader">
+  <!-- Кнопка пропустить (появится через 1.5 секунды) -->
+  <button id="skip-preloader-btn" type="button">Пропустить заставку</button>
+
+  <video autoplay muted playsinline id="preloader-video">
+    <!-- Укажи здесь путь к своему видеоролику -->
+    <source src="media/vidos.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+</div>
+
+<!-- Фоновая музыка американского молла (скрытая) -->
+<audio id="bg-mall-music" loop>
+  <!-- Укажи здесь путь к своей музыке -->
+  <source src="media/dea.mp3" type="audio/mpeg">
+  Ваш браузер не поддерживает аудио.
+</audio>
+  <script src="script.js"></script>
+       </header>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Добро пожаловать на наш сайт</h1>
+
+        <p>
+          Стало скучно играть в CS2, Minecraft и прочее?<br>
+           Скачивай лаунчер с нашими играми 
+           <span class="highlight">Bat, .EXE</span></br>
+           Играй на здоровье.
+          </p>
+
+      <br> 
+
+     <div class="Buttons">
+        <a href="игры.zip"
+       class="btn">скачать Лаунчер</a>
+      </div>
+
+         <br><br>
+
+            <div class="top">
+              <div class="bottom">
+                <div class="images">
+                      <img src="photo/ptball.jpg"
+                alt="pantball">
+                      <img src="photo/shake_in_python.jpg"
+                alt="shake">
+                      <img src="photo/survival.jpg"
+                alt="survival">
+                </div>
+              </div>
+            </div>
+            <h3>Cкучно играть в наши игры? преобрети RANG статус</h3>
+            <div class="card">
+              <img src="photo/rang.png" alt="статус">
+              <h4>Premium</h4>
+    <p>Все игры бесплатно</p>
+    <button class="buy-btn">Оплатить 3097₽</button>
+  </div>
+</div>
+<input type="text" id="playerNickname" placeholder="Введите ваш ник" class="ad-input" />
+            <div class="selectable-card" onclick="startPayment('Premium')">
+    </div>
+    <a href="indexhl.html" target="_blank" class="round-link-btn" title="поддержка">
+      <span class="btn-question">?</span>
+    </a>
+
+    <div class="age-badge">14+</div>
+    <div class="bage">V3.0</div>
+  </div>
+</div>
+<div id="afk-screensaver" style="display: none; opacity: 0;">
+  <video muted playsinline id="screensaver-video" loop>
+    <!-- Укажи путь к своему видеоролику для АФК -->
+    <source src="media/Screenrecorder-2026-08-19-16-02-54-864.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+</div>
+</body>
+</html>
